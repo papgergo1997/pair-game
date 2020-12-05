@@ -84,15 +84,15 @@ function memoryFlipTile(tile, val) {
                     //Flip the 2 tiles back over
                     let tile_1 = document.getElementById(memoryTileIds[0]);
                     let tile_2 = document.getElementById(memoryTileIds[1]);
-                    tile_1.style.background = 'url(./img/Kártya.jpg) no repeat';
-                    tile_1.style.innerHTML = ''
-                    tile_2.style.background = 'url(./img/Kártya.jpg) no repeat';
-                    tile_2.style.innerHTML = ''
+                    tile_1.style.background = 'url(./css/img/Kártya.jpg) no-repeat';
+                    tile_1.innerHTML = ''
+                    tile_2.style.background = 'url(./css/img/Kártya.jpg) no-repeat';
+                    tile_2.innerHTML = ''
                     //Clear both arrays
                     memoryValues = [];
                     memoryTileIds = [];
                 }
-                setTimeout(flip2Back, 700);               
+                setTimeout(flip2Back, 1000);               
             } 
         }
     }
