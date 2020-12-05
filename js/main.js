@@ -7,6 +7,9 @@ let memoryTileIds = [];
 let tilesFlipped = 0;
 let minutes = 0;
 let seconds = 0;
+let tile = '';
+let gameComplete = null;
+let doNotCount = null;
 
 Array.prototype.memoryTileShuffle = function () {
     let i = this.length, j, temp;
@@ -21,13 +24,19 @@ Array.prototype.memoryTileShuffle = function () {
 const workingCounter = () => {
     const counter = document.querySelector('.counter');
     const myRefresher = setInterval(DisplayModifier, 1000);
-    
-    function DisplayModifier() {        
-        seconds++;
-         if (seconds == 60) {
+
+    function DisplayModifier() {
+        if (tilesFlipped == memoryArray.length || gameComplete == true) {
+            seconds += 0;
+        } else {
+            seconds++;
+        }
+
+        if (seconds == 60) {
             seconds = 0;
             minutes++;
         };
+
         if (seconds > 9) {
             return document.querySelector('.counter').innerHTML = `0${minutes}:${seconds}`
         } else {
@@ -37,14 +46,15 @@ const workingCounter = () => {
 }
 
 function clockWatcher() {
-    if (minutes != 0 || seconds != 0){
-        return
-    } else {
+    if (minutes != 0 || seconds != 0) {
+    } else if (gameComplete == true || doNotCount == true){
+        return        
+    }else {
         workingCounter()
     }
 }
 
-function newBoard() {    
+function newBoard() {
     tilesFlipped = 0;
     let output = '';
     memoryArray.memoryTileShuffle();
@@ -52,22 +62,24 @@ function newBoard() {
         output += '<div id="tile_' + i + '" onclick="memoryFlipTile(this,\'' + memoryArray[i] + '\')"></div>';
     }
     document.getElementById('memory__board').innerHTML = output;
-    
+    minutes = 0;
+    seconds = 0;
 };
 
 function memoryFlipTile(tile, val) {
     if (tile.innerHTML == '' && memoryValues.length < 2) {
         tile.style.background = '#FFF';
         tile.innerHTML = val;
+        gameComplete = false;
         clockWatcher();
-        
+
         if (memoryValues.length == 0) {
             memoryValues.push(val);
             memoryTileIds.push(tile.id);
-            
+
         } else if (memoryValues.length == 1) {
             memoryValues.push(val);
-            memoryTileIds.push(tile.id);            
+            memoryTileIds.push(tile.id);
             if (memoryValues[0] == memoryValues[1]) {
                 tilesFlipped += 2;
                 //Clear both arrays
@@ -75,9 +87,9 @@ function memoryFlipTile(tile, val) {
                 memoryTileIds = [];
                 //Check to see if the whole board is clear
                 if (tilesFlipped == memoryArray.length) {
-                    alert('Board cleared... generating new board');
-                    document.getElementById('memory__board').innerHTML = '';
-                    newBoard();
+                    setTimeout(newBoard, 5000)
+                    gameComplete = true;
+                    doNotCount = true;
                 }
             } else {
                 function flip2Back() {
@@ -92,8 +104,8 @@ function memoryFlipTile(tile, val) {
                     memoryValues = [];
                     memoryTileIds = [];
                 }
-                setTimeout(flip2Back, 1000);               
-            } 
+                setTimeout(flip2Back, 1000);
+            }
         }
     }
 
