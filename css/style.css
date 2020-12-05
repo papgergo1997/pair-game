@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: "odinsson";
     src: url(./fonts/odinson-font/OdinsonLight-vMZD.ttf);
@@ -11,6 +10,11 @@
     font-weight: 300;
 }
 
+@font-face {
+    font-family: "beowulf";
+    src: url(./fonts/beowulf-runic-font/BeowulfRunic-vKvM.ttf);
+    font-weight: 300;
+}
 
 html {
     margin: 0;
@@ -57,51 +61,34 @@ main {
     font-family: "roboto";
 }
 
-.cards {
-    display: flex;
-    padding: 2rem 8rem;
-    height: 50%;  
+#memory__board {   
+    width: 80%;
+    height: 460px;
+    padding: 2rem;
+    margin: 0px auto;
+    margin-top: 1rem;
+    margin-left: 13.5rem;
 }
 
-.column1 { 
-    width: 30%;
-    margin-left: 4rem;       
-}
-.column2 { 
-    width: 30%;
-    margin-left: 1rem;
-       
-}
-.column3 { 
-    width: 30%;
-    margin-left: 1rem;
-       
-}
-.column4 { 
-    width: 30%;
-    margin-left: 1rem;
-       
-}
-.column5 { 
-    width: 30%;
-    margin-left: 1rem;
-       
-}
-
-.card {
-    display: inline-block;
-    width: 70%;
-    height: 50%;
-    margin-top: 2rem;
-    background-color: azure;
-    border-radius: 5px;
-    box-shadow: 0 0 9px rgb(80, 80, 80);
-    background-image: url(./img/Kártya.jpg);
-    transition: 0.5s all ease-in-out;
-}
-
-.card:hover {
-    box-shadow: 0 0 9px black; 
+#memory__board > div {
+    
+    background: url(./img/Kártya.jpg) no-repeat;
+    border: transparent 1px solid;
+    border-radius: 10px;
+    box-shadow: 0 0 9px rgb(100, 100, 100);
+    width: 11%;
+    height: 180px;
+    float: left;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    padding: 20px;
+    font-size: 140px;
     cursor: pointer;
+    text-align: center;
+    transition: 0.5s all ease-in-out;
+    font-family: "beowulf";
 }
 
+#memory__board > div:hover {
+    box-shadow: 0 0 9px black;
+}
